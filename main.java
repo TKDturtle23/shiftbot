@@ -65,11 +65,11 @@ public class _11908Omnidrive extends LinearOpMode {
         // Put loop blocks here.
         // The Y axis of a joystick ranges from -1 in its topmost position to +1 in its bottommost position.
         // We negate this value so that the topmost position corresponds to maximum forward power.
-        front_left_drive.setPower(((gamepad1.left_stick_y + gamepad1.left_stick_x) - gamepad1.right_stick_x) * Speed);
+        front_left_drive.setPower(((gamepad1.left_stick_y - gamepad1.left_stick_x) - gamepad1.right_stick_x) * Speed);
         front_right_drive.setPower((gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x) * Speed);
         // The Y axis of a joystick ranges from -1 in its topmost position to +1 in its bottommost position.
         // We negate this value so that the topmost position corresponds to maximum forward power.
-        back_left_drive.setPower(((gamepad1.left_stick_y - gamepad1.left_stick_x) - gamepad1.right_stick_x) * Speed);
+        back_left_drive.setPower(((gamepad1.left_stick_y + gamepad1.left_stick_x) - gamepad1.right_stick_x) * Speed);
         back_right_drive.setPower(((gamepad1.left_stick_y - gamepad1.left_stick_x) + gamepad1.right_stick_x) * Speed);
         if (gamepad2.dpad_down) {
           LinearHexMotor.setPower(1);
@@ -80,15 +80,12 @@ public class _11908Omnidrive extends LinearOpMode {
         }
         ClawWrist.setPower(gamepad2.left_stick_y * 0.3);
         ArmRotation.setPower(gamepad2.right_stick_y);
-        if (ClawGrabber.getPosition() > 0.27) {
-          if (gamepad2.a) {
-            ClawGrabber.setPosition(ClawGrabber.getPosition() - 0.02);
-          }
+        if (gamepad2.a) {
+          ClawGrabber.setPosition(-0.9);
         }
         if (gamepad2.b) {
-          ClawGrabber.setPosition(ClawGrabber.getPosition() + 0.02);
+          ClawGrabber.setPosition(0.9);
         }
-        // Telemetry is how we send data to the driver hub
         telemetry.addData("Speed", Speed);
         telemetry.addData("Claw Position", ClawGrabber.getPosition());
         telemetry.update();
