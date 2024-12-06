@@ -78,6 +78,18 @@ public class _11908Omnidrive extends LinearOpMode {
         } else {
           LinearHexMotor.setPower(0);
         }
+        ClawWrist.setPower(gamepad2.left_stick_y * 0.3);
+        ArmRotation.setPower(gamepad2.right_stick_y);
         if (gamepad2.a) {
           ClawGrabber.setPosition(-0.9);
         }
+        if (gamepad2.b) {
+          ClawGrabber.setPosition(0.9);
+        }
+        telemetry.addData("Speed", Speed);
+        telemetry.addData("Claw Position", ClawGrabber.getPosition());
+        telemetry.update();
+      }
+    }
+  }
+}
